@@ -108,6 +108,20 @@ class TcpConnectionTask extends AsyncTask <String , Void, String>{
             //close connection
             connectionSocket.close();
 
+            //replace each 10th space with a new line
+            char [] resArray = result.toCharArray();
+            int cnt = 0;
+            for (int i = 0; i < resArray.length; i++){
+                if (resArray[i] == ' '){
+                    cnt++;
+                    if (cnt == 10){
+                        cnt = 0;
+                        resArray[i] = '\n';
+                    }
+                }
+            }
+            result = new String (resArray);
+
             //return the result to method onPostExecute
             return result;
 
