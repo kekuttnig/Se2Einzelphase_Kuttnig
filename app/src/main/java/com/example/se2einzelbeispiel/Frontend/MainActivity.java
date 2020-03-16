@@ -1,8 +1,10 @@
 package com.example.se2einzelbeispiel.Frontend;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //link widgets
         sendButton = findViewById(R.id.main_button_send);
         userInput = findViewById(R.id.main_editText_userInput);
         serverResponse = findViewById(R.id.main_textView_serverResponse);
@@ -54,9 +58,21 @@ public class MainActivity extends AppCompatActivity {
         } );
     }
 
+    //onClick executes async task (TcpConnection)
     public void onClickSendButton(View v){
         String studentNumber = userInput.getText().toString();
         new TcpConnectionTask(serverResponse).execute(studentNumber);
+
+    }
+
+    //define action for click on menuItem -> start new activity (ToBinary)
+    public void onClickToBinary(MenuItem item){
+        Intent intent = new Intent(this, ToBinaryActivity.class);
+        startActivity(intent);
+    }
+
+    //app crashes if method doesn't exist
+    public void onClickNetworkTest(MenuItem item){
 
     }
 
@@ -67,7 +83,7 @@ class TcpConnectionTask extends AsyncTask <String , Void, String>{
     //define a weak reference to avoid memory leaks
     private WeakReference <TextView> serverResponseReference;
 
-    public TcpConnectionTask(TextView serverResponse){
+    TcpConnectionTask(TextView serverResponse){
         this.serverResponseReference = new WeakReference<>(serverResponse);
     }
 
@@ -82,7 +98,7 @@ class TcpConnectionTask extends AsyncTask <String , Void, String>{
             DataInputStream in = new DataInputStream(connectionSocket.getInputStream());
             DataOutputStream out = new DataOutputStream(connectionSocket.getOutputStream());
 
-            //send the message to the server -> first param of passed values <String, void, String>
+            //send the message to the server -> first param of passed values <String, void, String> -> String ends with a new line
             out.writeBytes(strings[0] + "\n");
 
             //receive message from server
@@ -109,8 +125,11 @@ class TcpConnectionTask extends AsyncTask <String , Void, String>{
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         TextView serverResponse = serverResponseReference.get();
+        //check if reference exists or already been garbage collected
         if (serverResponse != null){
             serverResponse.setText(result);
         }
     }
+
+
 }

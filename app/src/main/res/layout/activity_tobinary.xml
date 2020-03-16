@@ -71,6 +71,7 @@
         android:textColor="@color/white"
         android:background="@color/colorUniversitySecondary"
         android:layout_marginBottom="80dp"
+        android:onClick="onClickComputeButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

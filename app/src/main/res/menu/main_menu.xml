@@ -4,11 +4,13 @@
     <!-- define main menu items -->
     <item
         android:id="@+id/menu_NetworkTest"
-        android:title="@string/networktest" />
+        android:title="@string/networktest"
+        android:onClick="onClickNetworkTest"/>
 
     <item
         android:id="@+id/menu_toBinary"
         android:title="@string/tobinary"
+        android:onClick="onClickToBinary"
         />
 
 
