@@ -2,9 +2,11 @@ package com.example.se2einzelbeispiel.Frontend;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +40,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("NetworkTest");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+
+        //set up menu navigation
+        myToolbar.setNavigationIcon(R.drawable.ic_action_menu);
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                PopupMenu mainMenu = new PopupMenu(v.getContext(), v);
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.main_menu, mainMenu.getMenu());
+                mainMenu.show();
+            }
+        } );
     }
 
     public void onClickSendButton(View v){
@@ -72,6 +86,7 @@ class TcpConnectionTask extends AsyncTask <String , Void, String>{
             out.writeBytes(strings[0] + "\n");
 
             //receive message from server
+            //todo implement logic to read more than one line from response
             BufferedReader r = new BufferedReader(new InputStreamReader(in));
             String result = r.readLine();
 

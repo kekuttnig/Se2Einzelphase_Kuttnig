@@ -3,4 +3,6 @@
     <string name="insertText">Gib deine Matrikelnummer ein:</string>
     <string name="insert_hint">Matrikelnummer...</string>
     <string name="send">Abschicken</string>
+    <string name="networktest">NetworkTest</string>
+    <string name="tobinary">ToBinary</string>
 </resources>
