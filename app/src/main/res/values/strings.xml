@@ -5,4 +5,6 @@
     <string name="send">Abschicken</string>
     <string name="networktest">NetworkTest</string>
     <string name="tobinary">ToBinary</string>
+    <string name="binary_desc">Binäre Darstellung:</string>
+    <string name="compute">Berechnen</string>
 </resources>

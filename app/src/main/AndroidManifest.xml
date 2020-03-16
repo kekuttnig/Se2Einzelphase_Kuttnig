@@ -28,6 +28,7 @@
 
      <!-- declare other activities here -->
 
+        <activity android:name=".Frontend.ToBinaryActivity" />
 
     </application>
 
