@@ -102,7 +102,6 @@ class TcpConnectionTask extends AsyncTask <String , Void, String>{
             out.writeBytes(strings[0] + "\n");
 
             //receive message from server
-            //todo implement logic to read more than one line from response
             BufferedReader r = new BufferedReader(new InputStreamReader(in));
             String result = r.readLine();
 

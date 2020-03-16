@@ -52,10 +52,15 @@ public class ToBinaryActivity extends AppCompatActivity {
         } );
     }
 
-    //onClick executes async task (ConvertToBinary)
+    //onClick executes async task (ConvertToBinary) -> converts input to binary (32 bit one's complement)
     public void onClickComputeButton(View v){
-        int studentNumber = Integer.parseInt(userInput.getText().toString());
-        new ConvertToBinaryTask(convertedNumber).execute(studentNumber);
+        long studentNumber = Long.parseLong(userInput.getText().toString());
+        if (studentNumber > Integer.MAX_VALUE){
+            convertedNumber.setText("Ungültige Matrikelnummer! \n  ");
+        }else{
+            new ConvertToBinaryTask(convertedNumber).execute((int)studentNumber);
+        }
+
     }
 
     //define action for click on menuItem -> start new activity (MainActivity)
